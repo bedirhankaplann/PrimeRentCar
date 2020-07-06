@@ -1,0 +1,125 @@
+﻿@using PrimeRentACar.Models;
+@model Cars
+@{
+    ViewBag.Title = "Araç Düzenleme";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    PrimeEntities primeEntities = new PrimeEntities();
+    int id = ViewBag.id;
+    var car = primeEntities.Cars.Where(r => r.id == id);
+    
+}
+
+@using (Html.BeginForm("EditCar","Admin","Admin",FormMethod.Post, new {enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @foreach (var cars in car)
+        {
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => cars.id)
+
+            <div class="form-group">
+                @Html.Label("Marka", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => cars.CarName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => cars.CarName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Model", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => cars.CarModel, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => cars.CarModel, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Araç Yılı", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => cars.CarModelYear, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => cars.CarModelYear, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Motor Kapasitesi", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => cars.CarEngineCapacity, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => cars.CarEngineCapacity, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Vites Türü", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => cars.CarGearType, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => cars.CarGearType, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Yakıt Tipi", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => cars.CarFuelType, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => cars.CarFuelType, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Günlük Ücret", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => cars.CarDailyPrice, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => cars.CarDailyPrice, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Araç Resmi", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => cars.CarImage, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                    @Html.ValidationMessageFor(model => cars.CarImage, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Aktiflik Durmu", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => cars.isActive)
+                        @Html.ValidationMessageFor(model => cars.isActive, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Class Türü", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => cars.CarClass, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => cars.CarClass, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+           
+
+            <div class="form-group">
+                @Html.Label("Minimum Yaş", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => cars.PersonMinAge, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => cars.PersonMinAge, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Kaydet" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+}
+
+<div>
+    @Html.ActionLink("Araç Listesine Geri Dön", "ListCar")
+</div>

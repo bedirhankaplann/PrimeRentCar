@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PrimeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="PrimeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cars" EntityType="PrimeModel.Cars" />
+    <EntitySet Name="Members" EntityType="PrimeModel.Members" />
+    <EntitySet Name="Offices" EntityType="PrimeModel.Offices" />
+    <EntitySet Name="Suitability" EntityType="PrimeModel.Suitability" />
+    <AssociationSet Name="FK_Suitability_Cars" Association="PrimeModel.FK_Suitability_Cars">
+      <End Role="Cars" EntitySet="Cars" />
+      <End Role="Suitability" EntitySet="Suitability" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Suitability_Suitability" Association="PrimeModel.FK_Suitability_Suitability">
+      <End Role="Members" EntitySet="Members" />
+      <End Role="Suitability" EntitySet="Suitability" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Cars">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CarName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CarModel" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CarModelYear" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="CarEngineCapacity" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="CarGearType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CarFuelType" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CarDailyPrice" Type="Double" Nullable="false" />
+    <Property Name="CarRentStart" Type="DateTime" Precision="3" />
+    <Property Name="CarRentEnd" Type="DateTime" Precision="3" />
+    <Property Name="isActive" Type="Boolean" Nullable="false" />
+    <Property Name="CarClass" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="CarImage" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PersonMinAge" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Suitability" Relationship="PrimeModel.FK_Suitability_Cars" FromRole="Cars" ToRole="Suitability" />
+  </EntityType>
+  <EntityType Name="Members">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Surname" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="64" FixedLength="true" Unicode="true" />
+    <Property Name="isActive" Type="Boolean" />
+    <Property Name="IDNo" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Role" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfRegister" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Suitability" Relationship="PrimeModel.FK_Suitability_Suitability" FromRole="Members" ToRole="Suitability" />
+  </EntityType>
+  <EntityType Name="Offices">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OfficeName" Type="String" Nullable="false" MaxLength="40" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Suitability">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MemberID" Type="Int32" Nullable="false" />
+    <Property Name="CarId" Type="Int32" Nullable="false" />
+    <Property Name="RentStartDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="RentEndDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="TotalPrice" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Cars" Relationship="PrimeModel.FK_Suitability_Cars" FromRole="Suitability" ToRole="Cars" />
+    <NavigationProperty Name="Members" Relationship="PrimeModel.FK_Suitability_Suitability" FromRole="Suitability" ToRole="Members" />
+  </EntityType>
+  <Association Name="FK_Suitability_Cars">
+    <End Type="PrimeModel.Cars" Role="Cars" Multiplicity="1" />
+    <End Type="PrimeModel.Suitability" Role="Suitability" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cars">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Suitability">
+        <PropertyRef Name="CarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Suitability_Suitability">
+    <End Type="PrimeModel.Members" Role="Members" Multiplicity="1" />
+    <End Type="PrimeModel.Suitability" Role="Suitability" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Members">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Suitability">
+        <PropertyRef Name="MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PrimeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cars">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CarName" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CarModel" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CarModelYear" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="CarEngineCapacity" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="CarGearType" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="CarFuelType" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CarDailyPrice" Type="float" Nullable="false" />
+    <Property Name="CarRentStart" Type="datetime" />
+    <Property Name="CarRentEnd" Type="datetime" />
+    <Property Name="isActive" Type="bit" Nullable="false" />
+    <Property Name="CarClass" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="CarImage" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PersonMinAge" Type="nvarchar" MaxLength="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Members">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Surname" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Email" Type="nchar" MaxLength="30" Nullable="false" />
+    <Property Name="DateOfBirth" Type="date" Nullable="false" />
+    <Property Name="Phone" Type="nchar" MaxLength="11" Nullable="false" />
+    <Property Name="Password" Type="nchar" MaxLength="64" Nullable="false" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="IDNo" Type="nvarchar" MaxLength="11" />
+    <Property Name="ImageUrl" Type="nvarchar(max)" />
+    <Property Name="Role" Type="nvarchar" MaxLength="20" />
+    <Property Name="DateOfRegister" Type="date" />
+  </EntityType>
+  <EntityType Name="Offices">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OfficeName" Type="nchar" MaxLength="40" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Suitability">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MemberID" Type="int" Nullable="false" />
+    <Property Name="CarId" Type="int" Nullable="false" />
+    <Property Name="RentStartDate" Type="date" Nullable="false" />
+    <Property Name="RentEndDate" Type="date" Nullable="false" />
+    <Property Name="TotalPrice" Type="float" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Suitability_Cars">
+    <End Role="Cars" Type="Self.Cars" Multiplicity="1" />
+    <End Role="Suitability" Type="Self.Suitability" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cars">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Suitability">
+        <PropertyRef Name="CarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Suitability_Suitability">
+    <End Role="Members" Type="Self.Members" Multiplicity="1" />
+    <End Role="Suitability" Type="Self.Suitability" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Members">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Suitability">
+        <PropertyRef Name="MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PrimeModelStoreContainer">
+    <EntitySet Name="Cars" EntityType="Self.Cars" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Offices" EntityType="Self.Offices" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Suitability" EntityType="Self.Suitability" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Suitability_Cars" Association="Self.FK_Suitability_Cars">
+      <End Role="Cars" EntitySet="Cars" />
+      <End Role="Suitability" EntitySet="Suitability" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Suitability_Suitability" Association="Self.FK_Suitability_Suitability">
+      <End Role="Members" EntitySet="Members" />
+      <End Role="Suitability" EntitySet="Suitability" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

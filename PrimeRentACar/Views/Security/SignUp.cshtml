@@ -1,0 +1,147 @@
+﻿@using PrimeRentACar.Models;
+@model Members
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Prime Car</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="/assets/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+    <!--===============================================================================================-->
+</head>
+<body>
+
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+
+                <img src="~/assets/img/LoginCover.png" />
+                <form class="login100-form validate-form" method="post">
+                    @if (ViewBag.Info != null)
+                    {
+                        <div class="alert alert-info" role="alert">
+                            @ViewBag.Info
+                        </div>
+                    }
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="wrap-input100 validate-input m-b-26" data-validate="Ad Gereklidir">
+                        @Html.Label("Adı", htmlAttributes: new { @class = "label-input100" })
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "input100", @placeholder = "Bedirhan" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="wrap-input100 validate-input m-b-26" data-validate="Soyad Gereklidir">
+                        @Html.Label("Soyad", htmlAttributes: new { @class = "label-input100" })
+                        @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "input100", @placeholder = "KAPLAN" } })
+                        @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="wrap-input100 validate-input m-b-26" data-validate="Email Gereklidir">
+                        @Html.Label("Email", htmlAttributes: new { @class = "label-input100" })
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "input100", @type = "email", @placeholder = "prime@prime.com" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="wrap-input100 validate-input m-b-26" data-validate="Doğum Tarihi Gereklidir">
+                        @Html.Label("Doğum Tarihi", htmlAttributes: new { @class = "label-input100" })
+                        @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "input100", @type = "date", @placeholder = "01/01/1990" } })
+                        @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="wrap-input100 validate-input m-b-26" data-validate="Cep Telefonu Gereklidir">
+                        @Html.Label("Cep Telefonu", htmlAttributes: new { @class = "label-input100" })
+                        @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "input100", @type = "phone", @placeholder = "05555555555" } })
+                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="wrap-input100 validate-input m-b-26" data-validate="Şifre Gereklidir">
+                        @Html.Label("Şifre", htmlAttributes: new { @class = "label-input100" })
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "input100", @type = "password", @placeholder = "123*****" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="wrap-input100 validate-input m-b-26" data-validate="Kimlik Numarası Gereklidir">
+                        @Html.Label("Kimlik Numarası", htmlAttributes: new { @class = "label-input100" })
+                        @Html.EditorFor(model => model.IDNo, new { htmlAttributes = new { @class = "input100", @type = "number", @minlength = "11", @maxlength = "11", @placeholder = "12345678901" } })
+                        @Html.ValidationMessageFor(model => model.IDNo, "", new { @class = "text-danger" })
+
+                    </div>
+
+
+                    <div class="flex-sb-m w-full p-b-30">
+                        <div>
+                            <a href="/Security/Login" class="txt1">
+                                Zaten Prime Üyesiyseniz
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <button class="btn btn-primary" type="submit">
+                            Prime Dünyasına Kayıt Ol
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p class="lead" style="text-align:center;">PRIME ARAÇ KİRALAMA HİZMETLERİ © 2020</p>
+        </footer>
+
+    </div>
+
+    <!--===============================================================================================-->
+    <script src="/assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/assets/vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/assets/vendor/bootstrap/js/popper.js"></script>
+    <script src="/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/assets/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/assets/vendor/daterangepicker/moment.min.js"></script>
+    <script src="/assets/vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="/assets/vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="/assets/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+﻿@using PrimeRentACar.Models;
+@model Suitability
+@{
+    ViewBag.Title = "Anasayfa";
+}
+<!-- Main content -->
+
+@{
+    int userID = Convert.ToInt32(Session["id"]);
+    PrimeEntities primeEntities = new PrimeEntities();
+    var suitability = primeEntities.Suitability.ToList();
+
+}
+
+
+<h4 class="lead">Kiralanmış Araçlar</h4>
+<table class="table">
+    <tr class="bg-primary text-white">
+        <th>
+            @Html.DisplayName("Alınış Tarihi")
+        </th>
+        <th>
+            @Html.DisplayName("Teslim Tarihi")
+        </th>
+        <th>
+            @Html.DisplayName("Kişi Adı")
+        </th>
+        <th>
+            @Html.DisplayName("Kisi Soyadı")
+        </th>
+        <th>
+            @Html.DisplayName("Telefon")
+        </th>
+        <th>
+            @Html.DisplayName("Araç")
+        </th>
+        <th>
+            @Html.DisplayName("Marka")
+        </th>
+        <th>
+            @Html.DisplayName("Model")
+        </th>
+        <th>
+            @Html.DisplayName("Toplam Ücret")
+        </th>
+    </tr>
+
+    @foreach (var item in suitability)
+    {
+<tr class="bg-white">
+    <td>
+        @Html.DisplayFor(modelItem => item.RentStartDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.RentEndDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Members.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Members.Surname)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Members.Phone)
+    </td>
+    <td>
+        <div class="card" style="width: 5rem;">
+            <img src="@Html.DisplayFor(modelItem => item.Cars.CarImage)" class="card-img-top" alt="...">
+        </div>
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Cars.CarName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Cars.CarModel)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TotalPrice) ₺
+    </td>
+
+</tr>
+    }
+
+</table>
+

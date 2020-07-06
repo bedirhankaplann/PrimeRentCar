@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PrimeModelStoreContainer" CdmEntityContainer="PrimeEntities">
+    <EntitySetMapping Name="Cars">
+      <EntityTypeMapping TypeName="PrimeModel.Cars">
+        <MappingFragment StoreEntitySet="Cars">
+          <ScalarProperty Name="PersonMinAge" ColumnName="PersonMinAge" />
+          <ScalarProperty Name="CarImage" ColumnName="CarImage" />
+          <ScalarProperty Name="CarClass" ColumnName="CarClass" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="CarRentEnd" ColumnName="CarRentEnd" />
+          <ScalarProperty Name="CarRentStart" ColumnName="CarRentStart" />
+          <ScalarProperty Name="CarDailyPrice" ColumnName="CarDailyPrice" />
+          <ScalarProperty Name="CarFuelType" ColumnName="CarFuelType" />
+          <ScalarProperty Name="CarGearType" ColumnName="CarGearType" />
+          <ScalarProperty Name="CarEngineCapacity" ColumnName="CarEngineCapacity" />
+          <ScalarProperty Name="CarModelYear" ColumnName="CarModelYear" />
+          <ScalarProperty Name="CarModel" ColumnName="CarModel" />
+          <ScalarProperty Name="CarName" ColumnName="CarName" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Members">
+      <EntityTypeMapping TypeName="PrimeModel.Members">
+        <MappingFragment StoreEntitySet="Members">
+          <ScalarProperty Name="DateOfRegister" ColumnName="DateOfRegister" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="IDNo" ColumnName="IDNo" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Offices">
+      <EntityTypeMapping TypeName="PrimeModel.Offices">
+        <MappingFragment StoreEntitySet="Offices">
+          <ScalarProperty Name="OfficeName" ColumnName="OfficeName" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Suitability">
+      <EntityTypeMapping TypeName="PrimeModel.Suitability">
+        <MappingFragment StoreEntitySet="Suitability">
+          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+          <ScalarProperty Name="RentEndDate" ColumnName="RentEndDate" />
+          <ScalarProperty Name="RentStartDate" ColumnName="RentStartDate" />
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

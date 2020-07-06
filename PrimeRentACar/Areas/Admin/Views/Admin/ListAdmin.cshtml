@@ -1,0 +1,50 @@
+﻿@model PrimeRentACar.Models.DataListViewModel
+
+@{
+    ViewBag.Title = "Admin Listesi";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@{
+    if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+}
+<br>
+<p>
+    @Html.ActionLink("Admin Ekle", "CreateAdmin", "Admin", new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <thead class="bg-primary text-white">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">ADI</th>
+            <th scope="col">SOYADI</th>
+            <th scope="col">CEP TELEFONU</th>
+            <th scope="col">EMAIL</th>
+            <th scope="col">KAYIT TARIHI</th>
+            <th scope="col">AKTIFLIK DURUMU</th>
+            <th scope="col">ISLEMLER</th>
+        </tr>
+    </thead>
+
+    @foreach (var admins in Model.members)
+    {
+        <tbody class="bg-white">
+            <tr>
+                <th scope="row">@admins.id</th>
+                <td>@admins.Name</td>
+                <td>@admins.Surname</td>
+                <td>@admins.Phone</td>
+                <td>@admins.Email</td>
+                <td>@admins.DateOfBirth </td>
+                <td>@admins.isActive </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditAdmin", new { id = admins.id }, new { @class = "btn btn-primary btn-sm" }) |
+                    @Html.ActionLink("Details", "Details", new { id = admins.id }, new { @class = "btn btn-success btn-sm" }) |
+                    @Html.ActionLink("Sil", "DeleteAdmin", new { id = admins.id }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        </tbody>
+    }
+</table>

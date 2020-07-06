@@ -1,0 +1,120 @@
+﻿@using PrimeRentACar.Models;
+@model Suitability
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{ 
+    int userID = Convert.ToInt32(Session["id"]);
+    PrimeEntities primeEntities = new PrimeEntities();
+    var suitability = primeEntities.Suitability.Where(r => r.MemberID == userID).ToList();
+
+}
+
+<style>
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        margin: auto;
+        text-align: center;
+    }
+
+    .title {
+        color: grey;
+        font-size: 18px;
+    }
+
+    button {
+        border: none;
+        outline: 0;
+        display: inline-block;
+        padding: 8px;
+        color: white;
+        background-color: #000;
+        text-align: center;
+        cursor: pointer;
+        width: 100%;
+        font-size: 18px;
+    }
+
+    a {
+        text-decoration: none;
+        font-size: 22px;
+        color: black;
+    }
+
+        button:hover, a:hover {
+            opacity: 0.7;
+        }
+</style>
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="row">
+    <div class="col-md-3">
+        <div class="card">
+            <img src="~/assets/img/Logo.png" alt="John" style="width:70%">
+            <h1 class="lead">@Session["Name"] @Session["Surname"]</h1>
+            <p class=" lead">@Session["DateOfBirth"]</p>
+            <p class="lead">@Session["IDNo"]</p>
+            <p class="lead">@Session["Email"]</p>
+            <p class="lead">@Session["Phone"]</p>
+
+            <p><a class=" btn btn-primary" href="@Url.Action("SignOut","Home")">Çıkış Yap</a></p>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <table class="table">
+            <tr class="bg-warning text-white">
+                <th>
+                    @Html.DisplayName("Alış Tarihi")
+                </th>
+                <th>
+                    @Html.DisplayName("Teslim Tarihi")
+                </th>
+                <th>
+                    @Html.DisplayName("Araç")
+                </th>
+                <th>
+                    @Html.DisplayName("Marka")
+                </th>
+                <th>
+                    @Html.DisplayName("Model")
+                </th>
+                <th>
+                    @Html.DisplayName("Ücret")
+                </th>
+            </tr>
+
+            @foreach (var item in suitability)
+            {
+        <tr class="bg-white">
+            <td>
+                @Html.DisplayFor(modelItem => item.RentStartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RentEndDate)
+            </td>
+            <td>
+                <div class="card" style="width: 5rem;">
+                    <img src="@Html.DisplayFor(modelItem => item.Cars.CarImage)" class="card-img-top" alt="...">
+                  </div>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cars.CarName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cars.CarModel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice) ₺
+            </td>
+
+        </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+
+

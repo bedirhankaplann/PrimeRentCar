@@ -1,0 +1,90 @@
+﻿@model PrimeRentACar.Models.DataListViewModel
+
+@{
+    ViewBag.Title = "Araç Silme";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@{
+    var id = ViewBag.id;
+}
+<br>
+<h3 style="margin:20px;">Silme İşlemini Onaylıyormusunuz?</h3>
+<div>
+    <hr />
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { @style = "margin:20px;" }))
+    {
+        @Html.AntiForgeryToken()
+        <dl class="dl-horizontal">
+            @foreach (var cars in Model.cars
+                .Where(x => x.id == id))
+            {
+                <dt>
+                    @Html.DisplayName("Marka")
+
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => cars.CarName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Model")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => cars.CarModel)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Model Yılı")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => cars.CarModelYear)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Motor Kapasitesi")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => cars.CarEngineCapacity)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Yakıt Tipi")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => cars.CarFuelType)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Vites Türü")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => cars.CarGearType)
+                </dd>
+
+              
+
+                <dt>
+                    @Html.DisplayName("Aktiflik Durumu")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => cars.isActive)
+                </dd>
+
+
+            }
+
+        </dl>
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-primary" /> |
+            @Html.ActionLink("Araç Listesine Dön", "ListCar")
+        </div>
+    }
+</div>

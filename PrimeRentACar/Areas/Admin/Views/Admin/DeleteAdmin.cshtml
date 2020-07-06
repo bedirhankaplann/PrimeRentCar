@@ -1,0 +1,103 @@
+﻿@model PrimeRentACar.Models.DataListViewModel
+
+@{
+    ViewBag.Title = "Admin Silme";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@{ 
+    var id = ViewBag.id;
+}
+<br>
+<h3 style="margin:20px;">Silme İşlemini Onaylıyormusunuz?</h3>
+<div>
+    <hr />
+    @using (Html.BeginForm(null,null,FormMethod.Post,new { @style="margin:20px;"}))
+    {
+        @Html.AntiForgeryToken()
+        <dl class="dl-horizontal">
+            @foreach (var admins in Model.members
+                .Where(x => x.id == id))
+            {
+                <dt>
+                    @Html.DisplayName("İsim")
+                    
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => admins.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Soyisim")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => admins.Surname)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Kimlik Numarası")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => admins.IDNo)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Email")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => admins.Email)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Cep Telefonu")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => admins.Phone)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Doğum Tarihi")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => admins.DateOfBirth)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Kayıt Tarihi")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => admins.DateOfRegister)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Aktiflik Durumu")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => admins.isActive)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Şifresi")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => admins.Password)
+                </dd>
+
+            }
+
+        </dl>
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-primary" /> |
+            @Html.ActionLink("Admin Listesine Dön", "ListAdmin")
+        </div>
+    }
+</div>

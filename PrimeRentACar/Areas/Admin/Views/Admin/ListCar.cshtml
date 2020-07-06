@@ -1,0 +1,54 @@
+﻿@model PrimeRentACar.Models.DataListViewModel
+
+@{
+    ViewBag.Title = "Araçların Listesi";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<br>
+<p>
+    @Html.ActionLink("ARAÇ EKLE", "CreateCar","Admin","Admin",new { @class = "btn btn-primary"})
+</p>
+<table class="table">
+    <thead class="bg-primary text-white">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">ARAÇ</th>
+            <th scope="col">MARKA</th>
+            <th scope="col">MODELİ</th>
+            <th scope="col">SINIFI</th>
+            <th scope="col">YILI</th>
+            <th scope="col">MOTOR </th>
+            <th scope="col">YAKIT</th>
+            <th scope="col">VITES</th>
+            <th scope="col">G.UCRET</th>
+            <th scope="col">ISLEMLER</th>
+        </tr>
+    </thead>
+
+    @foreach (var cars in Model.cars)
+    {
+        <tbody class="bg-white">
+            <tr>
+                <th scope="row">@cars.id</th>
+                <th>
+                    <div class="card" style="width: 6rem;">
+                        <img class="card-img-top" src="@cars.CarImage">
+                    </div>
+                </th>
+                <td>@cars.CarName</td>
+                <td>@cars.CarModel</td>
+                <td>@cars.CarClass</td>
+                <td>@cars.CarModelYear</td>
+                <td>@cars.CarEngineCapacity</td>
+                <td>@cars.CarFuelType </td>
+                <td>@cars.CarGearType </td>
+                <td>@cars.CarDailyPrice </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditCar", new { id = cars.id }, new { @class = "btn btn-primary btn-sm" }) |
+                    @Html.ActionLink("Details", "DetailCar", new { id = cars.id }, new { @class = "btn btn-success btn-sm" }) |
+                    @Html.ActionLink("Sil", "DeleteCar", new { id = cars.id }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        </tbody>
+    }
+</table>
